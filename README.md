@@ -18,7 +18,7 @@ to verify access tokens provided by said clients.
 - Spring 3
 - Spring Authorization Server
 - Spring Security
-- Postgresql integration to store the registered client repository 
+- Postgresql for storing the registered client repository and authorizations 
 
 ## Usage
 The server automatically persists a valid client upon startup which you can use to either retrieve registered clients
