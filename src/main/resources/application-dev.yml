@@ -1,0 +1,6 @@
+spring:
+  dataSource:
+    url: jdbc:postgresql://localhost:5432/playground_db
+    username: postgres
+    password: admin
+    driverClassName: org.postgresql.Driver

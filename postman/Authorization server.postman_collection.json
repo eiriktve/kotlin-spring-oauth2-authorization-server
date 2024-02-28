@@ -1,0 +1,66 @@
+{
+	"info": {
+		"_postman_id": "1cae8c04-f76c-4393-8cea-3d2ed38f1914",
+		"name": "Authorization server",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11463340"
+	},
+	"item": [
+		{
+			"name": "oauth2/token",
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "headerPrefix",
+							"value": "Basic",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic c3RhY2tjYW5hcnktY2xpZW50OjEyMzQ=",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "text"
+						},
+						{
+							"key": "scope",
+							"value": "messages.read",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:9000/oauth2/token",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"oauth2",
+						"token"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
