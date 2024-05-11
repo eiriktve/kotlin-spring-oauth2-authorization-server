@@ -42,13 +42,17 @@ A valid response will look like this:
 ````text
 {
     "access_token": "eyJraWQiOiI5ZDM2ZmJhMi01ZGIxLTQ4MzctODM2YS0zODkyYWUzZDhmMjciLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJzdGFja2NhbmFyeS1jbGllbnQiLCJhdWQiOiJzdGFja2NhbmFyeS1jbGllbnQiLCJuYmYiOjE3MDkxNTU0NjEsInNjb3BlIjpbIm1lc3NhZ2VzLnJlYWQiXSwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo5MDAwIiwiZXhwIjoxNzA5MTU3MjYxLCJpYXQiOjE3MDkxNTU0NjEsImp0aSI6ImZmNmUyNjMwLTY2Y2QtNGU0Ny1hY2VhLWMzYTk1NTEzOGZjYiJ9.iTUZ1kuAD5f-Zw0BKjodrmRTocq1iQkxoqSMnjNGd_Abo48w_gtYxgHtV1AQ5FUU-C-ZBYNUQtPlauwgAjU0kT2dh83Bb6fAMd-n0zhml7YPNuN11VYTaOH36WxF8q2JTN68yoUITgkTwljOoTTQw58wAGNSSkqic4dzAUTIxUwNDJzEXByrezgPQO7O53EDBril8cLwFRMLPYW_3s0FRkQH1vXc1G2ltPEvfpaZXwnn4ArxSAMVQKXhxjPMxL5yWhKHbRkdj1kJmpAc2qvx0cBtwRnbxlhyisxR8myZS2Fea-Cje5QqJGQACfj8TV8KbVBogYky3t48uuP1UVGuMQ",
-    "scope": "messages.read",
+    "scope": "employee.read",
     "token_type": "Bearer",
     "expires_in": 1799
 }
 ````
 
 You can import an example request for the default registered client [here](postman/Authorization server.postman_collection.json)
+
+### Scopes
+I've made some custom scopes for the domain imagined for the oauth applications 
+on [this](https://github.com/eiriktve?tab=repositories) GitHub account, but custom scopes can be coded in as needed.
 
 ## Database
 The Spring Oauth component *RegisteredClientRepository* depends on the table definitions described in 

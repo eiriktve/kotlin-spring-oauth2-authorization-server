@@ -71,7 +71,10 @@ class SecurityConfig {
             .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
             .scope("client.create") // allow the client to register a new client
             .scope("client.read") // allow the client to retrieve a registered client
-            .scope("messages.read") // custom scope
+            // custom scopes for an employee domain / protected resource
+            .scope("employee.read")
+            .scope("employee.edit")
+            .scope("employee.create")
             .clientSettings(
                 ClientSettings.builder()
                     .requireAuthorizationConsent(true)
