@@ -29,7 +29,6 @@
 					{
 						"key": "Authorization",
 						"value": "Basic c3RhY2tjYW5hcnktY2xpZW50OjEyMzQ=",
-						"type": "text",
 						"disabled": true
 					}
 				],
@@ -43,7 +42,7 @@
 						},
 						{
 							"key": "scope",
-							"value": "messages.read",
+							"value": "employee.read",
 							"type": "text"
 						}
 					]
@@ -57,6 +56,54 @@
 					"path": [
 						"oauth2",
 						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "oauth2/introspect",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic c3RhY2tjYW5hcnktY2xpZW50OjEyMzQ=",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "token",
+							"value": "eyJraWQiOiJkMGZmMTI1OC0xMTg5LTQ2MmUtYmM3NS1lMjQ0NTI0YTczMmUiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJzdGFja2NhbmFyeS1jbGllbnQiLCJhdWQiOiJzdGFja2NhbmFyeS1jbGllbnQiLCJuYmYiOjE3MTU3MDU2NzUsInNjb3BlIjpbImVtcGxveWVlLnJlYWQiXSwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo5MDAwIiwiZXhwIjoxNzE1NzA3NDc1LCJpYXQiOjE3MTU3MDU2NzUsImp0aSI6ImJjMzM5MTQ1LWI2MjAtNDQ5OC05NWFjLTYxNTIxMDQ0Njg5MCJ9.JlAw9ahU06t1wBdvjnZWmSXbnKb7sSPlEO8Ym4DcVuk8La7epAgfBykCCyK_32B7YSk9ntaQWnlXE00bTNKGthgszX60BBBIAHFoJHdR1TNRYG2rWfpm3wqWIizkfTlKi0PWAawvnWWyEj1oKbfLiMABE0RfVm6-_ct5x8_6003a1fW6SiGlQNZPtUxCw_bynEu8fmnXTiY23Mrdmp4dtP4WSQ7VrOndmXpy2XSFwl0i1XPmqKL81PT-CUXbzMWmLOYuoekPG0u2VUnPvPDtnJaIgZqJQLxpsQWOKGXAzZTjyiP7LZwE8ZspNKk_-kl4dGmLsicRA8WNlCpIZ--rZw",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "stackcanary-client",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "hunter2",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:9000/oauth2/introspect",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"oauth2",
+						"introspect"
 					]
 				}
 			},

@@ -24,6 +24,7 @@ to verify access tokens provided by said clients.
 The server automatically persists a valid client upon startup which you can use to either retrieve registered clients
 or to register new clients.
 
+### Get a token
 To get an access token you need to do a request to ```{server}:{port}/oauth2/token```  
 The request should be on this format (choose the scopes you need):
 
@@ -39,7 +40,7 @@ Credentials should be base64 encoded as <**client-id**>:<**client-secret**>
 Can be done in bash like this: ```echo -n "client-id:client-secret" | base64```
 
 A valid response will look like this:
-````text
+````json
 {
     "access_token": "eyJraWQiOiI5ZDM2ZmJhMi01ZGIxLTQ4MzctODM2YS0zODkyYWUzZDhmMjciLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJzdGFja2NhbmFyeS1jbGllbnQiLCJhdWQiOiJzdGFja2NhbmFyeS1jbGllbnQiLCJuYmYiOjE3MDkxNTU0NjEsInNjb3BlIjpbIm1lc3NhZ2VzLnJlYWQiXSwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo5MDAwIiwiZXhwIjoxNzA5MTU3MjYxLCJpYXQiOjE3MDkxNTU0NjEsImp0aSI6ImZmNmUyNjMwLTY2Y2QtNGU0Ny1hY2VhLWMzYTk1NTEzOGZjYiJ9.iTUZ1kuAD5f-Zw0BKjodrmRTocq1iQkxoqSMnjNGd_Abo48w_gtYxgHtV1AQ5FUU-C-ZBYNUQtPlauwgAjU0kT2dh83Bb6fAMd-n0zhml7YPNuN11VYTaOH36WxF8q2JTN68yoUITgkTwljOoTTQw58wAGNSSkqic4dzAUTIxUwNDJzEXByrezgPQO7O53EDBril8cLwFRMLPYW_3s0FRkQH1vXc1G2ltPEvfpaZXwnn4ArxSAMVQKXhxjPMxL5yWhKHbRkdj1kJmpAc2qvx0cBtwRnbxlhyisxR8myZS2Fea-Cje5QqJGQACfj8TV8KbVBogYky3t48uuP1UVGuMQ",
     "scope": "employee.read",
@@ -47,6 +48,39 @@ A valid response will look like this:
     "expires_in": 1799
 }
 ````
+
+### Validate/Introspect a token
+In order to validate that a token is i.e., active, you need to call the introspect endpoint like so (you don't have to 
+prepend Bearer to the token):
+
+````text
+POST /oauth2/introspect HTTP/1.1
+Host: your-spring-auth-server.com
+Content-Type: application/x-www-form-urlencoded
+
+token=YOUR_ACCESS_TOKEN&client_id=YOUR_CLIENT_ID&client_secret=YOUR_CLIENT_SECRET
+
+````
+
+This should yield a response like this:
+````json
+{
+    "active": true,
+    "sub": "stackcanary-client",
+    "aud": [
+        "stackcanary-client"
+    ],
+    "nbf": 1715705675,
+    "scope": "employee.read",
+    "iss": "http://localhost:9000",
+    "exp": 1715707475,
+    "iat": 1715705675,
+    "jti": "bc339145-b620-4498-95ac-615210446890",
+    "client_id": "stackcanary-client",
+    "token_type": "Bearer"
+}
+````
+
 
 You can import an example request for the default registered client [here](postman/Authorization server.postman_collection.json)
 
