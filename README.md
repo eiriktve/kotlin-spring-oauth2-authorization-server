@@ -51,20 +51,36 @@ A valid response will look like this:
 
 *As a side note, the client credentials grant does not support refresh tokens.*
 
-### Validate/Introspect a token
-In order to validate that a token is i.e., active, you need to call the introspect endpoint like so (you don't have to 
-prepend Bearer to the token):
+### Introspect/validate a token
+In order to validate that a token is i.e., active, you need to call the **/oauth2/introspect** endpoint (you don't have 
+to prepend Bearer to the token):
 
+**Validate with credentials:**
 ````text
 POST /oauth2/introspect HTTP/1.1
 Host: your-spring-auth-server.com
 Content-Type: application/x-www-form-urlencoded
 
-token=YOUR_ACCESS_TOKEN&client_id=YOUR_CLIENT_ID&client_secret=YOUR_CLIENT_SECRET
+token=ACCESS_TOKEN&client_id=YOUR_CLIENT_ID&client_secret=YOUR_CLIENT_SECRET
 
 ````
 
-This should yield a response like this:
+**Validate without credentials** \
+Typically what you'd use in a resource server when validating a token from a client. The resource server has its own
+RegisteredClient in the Authorization Server database, which it can use to authenticate the introspection request, 
+using the authorization header, like so:
+
+````text
+POST /oauth2/introspect HTTP/1.1
+Host: your-spring-auth-server.com
+Content-Type: application/x-www-form-urlencoded
+Authorization: Basic <base64-encoded-credentials>
+
+token=ACCESS_TOKEN
+
+````
+
+These should yield a response like this:
 ````json
 {
     "active": true,
@@ -84,7 +100,7 @@ This should yield a response like this:
 ````
 
 
-You can import a postman collection containing example requests [here](postman/Authorization server.postman_collection.json)
+You can import a postman collection containing example requests [here](https://github.com/eiriktve/kotlin-spring-oauth2-authorization-server/blob/main/postman/Authorization%20server.postman_collection.json)
 
 ### Scopes
 I've made some custom scopes for the domain imagined for the oauth applications 

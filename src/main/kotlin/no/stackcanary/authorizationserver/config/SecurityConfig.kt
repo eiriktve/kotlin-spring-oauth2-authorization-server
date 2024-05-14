@@ -13,6 +13,8 @@ import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.security.config.Customizer
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
+import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.oauth2.core.AuthorizationGrantType
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod
 import org.springframework.security.oauth2.jose.jws.SignatureAlgorithm
@@ -43,7 +45,7 @@ import java.util.*
 class SecurityConfig {
 
     /**
-     * AuthorizationServerSettings to configure Spring Authorization Server
+     * Configures the Authorization Server, such as defining the different default endpoints.
      */
     @Bean
     fun authorizationServerSettings(): AuthorizationServerSettings =
@@ -57,13 +59,14 @@ class SecurityConfig {
     }
 
     /**
-     * Registers a "default" client in our database
+     * Registers a couple of default clients we can use for our projects. One is a base client with all
+     * permissions/scopes, another one is for the resource server.
      */
     @Bean
     fun registeredClientRepository(jdbcTemplate: JdbcTemplate): RegisteredClientRepository {
-        val registeredClient = RegisteredClient.withId(UUID.randomUUID().toString())
+        val baseClient = RegisteredClient.withId(UUID.randomUUID().toString())
             .clientId("stackcanary-client" )
-            .clientSecret("{noop}hunter2") // "noop" in this case is the password storing format, not part of the pw https://spring.io/blog/2017/11/01/spring-security-5-0-0-rc1-released#password-storage-format
+            .clientSecret(passwordEncoder().encode("hunter2"))
             .clientAuthenticationMethods { authMethods: MutableSet<ClientAuthenticationMethod> ->
                 authMethods.add(ClientAuthenticationMethod.CLIENT_SECRET_POST)
                 authMethods.add(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
@@ -92,11 +95,38 @@ class SecurityConfig {
             )
             .build()
 
+        // The resource server needs its own credentials to be able to call the introspection endpoint in order to
+        // validate incoming tokens
+        val resourceServerClient = RegisteredClient.withId(UUID.randomUUID().toString())
+            .clientId("resource-server-client" )
+            .clientSecret(passwordEncoder().encode("resource-server-secret"))
+            .clientAuthenticationMethods { authMethods: MutableSet<ClientAuthenticationMethod> ->
+                authMethods.add(ClientAuthenticationMethod.CLIENT_SECRET_POST)
+                authMethods.add(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
+            }
+            .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
+            .build()
+
         val registeredClientRepository = JdbcRegisteredClientRepository(jdbcTemplate)
-        registeredClientRepository.save(registeredClient)
+
+        // for convenience, as clients must be unique, and you'll most likely restart the service multiple times
+        // during development (and we're not running an in-memory db)
+        if (!exists(baseClient, registeredClientRepository)) {
+            registeredClientRepository.save(baseClient)
+        }
+
+        if (!exists(resourceServerClient, registeredClientRepository)) {
+            registeredClientRepository.save(resourceServerClient)
+        }
+
         return registeredClientRepository
     }
 
+    private fun exists(client: RegisteredClient, repository: JdbcRegisteredClientRepository): Boolean =
+        repository.findByClientId(client.clientId) != null
+
+    @Bean
+    fun passwordEncoder(): PasswordEncoder = BCryptPasswordEncoder()
 
     /**
      * Stores new authorizations and queries existing ones

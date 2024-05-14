@@ -80,7 +80,7 @@
 					"urlencoded": [
 						{
 							"key": "token",
-							"value": "eyJraWQiOiJkMGZmMTI1OC0xMTg5LTQ2MmUtYmM3NS1lMjQ0NTI0YTczMmUiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJzdGFja2NhbmFyeS1jbGllbnQiLCJhdWQiOiJzdGFja2NhbmFyeS1jbGllbnQiLCJuYmYiOjE3MTU3MDU2NzUsInNjb3BlIjpbImVtcGxveWVlLnJlYWQiXSwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo5MDAwIiwiZXhwIjoxNzE1NzA3NDc1LCJpYXQiOjE3MTU3MDU2NzUsImp0aSI6ImJjMzM5MTQ1LWI2MjAtNDQ5OC05NWFjLTYxNTIxMDQ0Njg5MCJ9.JlAw9ahU06t1wBdvjnZWmSXbnKb7sSPlEO8Ym4DcVuk8La7epAgfBykCCyK_32B7YSk9ntaQWnlXE00bTNKGthgszX60BBBIAHFoJHdR1TNRYG2rWfpm3wqWIizkfTlKi0PWAawvnWWyEj1oKbfLiMABE0RfVm6-_ct5x8_6003a1fW6SiGlQNZPtUxCw_bynEu8fmnXTiY23Mrdmp4dtP4WSQ7VrOndmXpy2XSFwl0i1XPmqKL81PT-CUXbzMWmLOYuoekPG0u2VUnPvPDtnJaIgZqJQLxpsQWOKGXAzZTjyiP7LZwE8ZspNKk_-kl4dGmLsicRA8WNlCpIZ--rZw",
+							"value": "eyJraWQiOiI4YWY3ZjVhMi0yYzdlLTQ4OWQtYjBmYi0yZjM1NjcwZWU1NjciLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJzdGFja2NhbmFyeS1jbGllbnQiLCJhdWQiOiJzdGFja2NhbmFyeS1jbGllbnQiLCJuYmYiOjE3MTU3MDkxMDAsInNjb3BlIjpbImVtcGxveWVlLnJlYWQiXSwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo5MDAwIiwiZXhwIjoxNzE1NzEwOTAwLCJpYXQiOjE3MTU3MDkxMDAsImp0aSI6IjEzYzFmNmZjLWI4YWYtNDhkNS1hMjI3LWEzZjUxNjRmMWFlOCJ9.GInWkSGjmz93pvdGyBIz_cyimF_QsGKw9xYazE32_mU3fMv0s7tGApNiX0D7uKiEJcW12f7mEUSIy647UMB_Mrx5jJTiHmWHSSUD8BgMSWLVXjtha-W7si50ZlL4bpTWatCh9L1dj3RqVOCCeQL-vqU7_Zfpv0qTLnm6uW6ndnXfuio7sQcsCFMVM6FDYQI2G6YSuDX95a7X4WJX2zgcizwsbCAEM541bPDD2uVrI7MoJp9F6EEUvF_7GO_dCZJOgFY_AB6rbgDlLEUyeh7v4BwFMI5zJBKhh2UHbYa3gt5mLgPgIwqT8I2P431keUt2IMiH3tw1aUEgBkJPP2clZQ",
 							"type": "text"
 						},
 						{
@@ -91,6 +91,56 @@
 						{
 							"key": "client_secret",
 							"value": "hunter2",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:9000/oauth2/introspect",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"oauth2",
+						"introspect"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "validate",
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "headerPrefix",
+							"value": "Basic",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic c3RhY2tjYW5hcnktY2xpZW50OjEyMzQ=",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "token",
+							"value": "eyJraWQiOiJkN2FiM2RmZC1lM2VjLTRhODYtYTAwMi02MGY5ZWRjYTViOGUiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJzdGFja2NhbmFyeS1jbGllbnQiLCJhdWQiOiJzdGFja2NhbmFyeS1jbGllbnQiLCJuYmYiOjE3MTU3MTM1MTAsInNjb3BlIjpbImVtcGxveWVlLnJlYWQiXSwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo5MDAwIiwiZXhwIjoxNzE1NzE1MzEwLCJpYXQiOjE3MTU3MTM1MTAsImp0aSI6ImQ4YjQwYjI1LWRlMjItNDQxNi04ODM5LWNmYmIzNTkwOWM5YiJ9.xDPRy29cGUeIx_g2PO98neQ40S5LOmtvd8607r-NHtojaOzg75H11CV9sIj4AZRkQ8LtOwjlEd6-GWDsEk-ipsxfjntsLKK-SttB6tKkU8xQokkiwD8KepsET-nzV7luZfPueCI7dHaoxaJBM-OtBzDehJIV1BdiFJAOmaoT0RKh8iUSTVZPltwWZ44LADB6TzkdWrhLZZUaxMMRDzw9lQqNIpjbAQtoii0YyDZtf5nyXz_L7XyVCLuayS5LTzPRF03kiJ4mItymcfK6OCD7iQQVZfzuEu6ewEdha7CHi0yY9OW-GF57NTfk6UrTyNmKf2kXievG3VTUgrjlueb_4Q",
 							"type": "text"
 						}
 					]
