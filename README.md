@@ -15,7 +15,7 @@ to verify access tokens provided by said clients.
 
 ## Technologies
 - Kotlin with JDK 17
-- Spring 3
+- Spring Boot 3
 - Spring Authorization Server
 - Spring Security
 - Postgresql for storing the registered client repository and authorizations 
@@ -33,7 +33,7 @@ POST /oauth2/token HTTP/1.1
 Authorization: Basic <base64-encoded-credentials>
 Content-Type: application/x-www-form-urlencoded
 
-grant_type=client_credentials&scope=client.create
+grant_type=client_credentials&scope=employee.read
 ````
 
 Credentials should be base64 encoded as <**client-id**>:<**client-secret**>  
@@ -48,6 +48,8 @@ A valid response will look like this:
     "expires_in": 1799
 }
 ````
+
+*As a side note, the client credentials grant does not support refresh tokens.*
 
 ### Validate/Introspect a token
 In order to validate that a token is i.e., active, you need to call the introspect endpoint like so (you don't have to 
@@ -82,7 +84,7 @@ This should yield a response like this:
 ````
 
 
-You can import an example request for the default registered client [here](postman/Authorization server.postman_collection.json)
+You can import a postman collection containing example requests [here](postman/Authorization server.postman_collection.json)
 
 ### Scopes
 I've made some custom scopes for the domain imagined for the oauth applications 
