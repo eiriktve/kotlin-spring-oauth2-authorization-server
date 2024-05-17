@@ -26,14 +26,14 @@ or to register new clients.
 
 ### Get a token
 To get an access token you need to do a request to ```{server}:{port}/oauth2/token```  
-The request should be on this format (choose the scopes you need):
+The request should be on this format (if you want multiple scopes, they need to be separated by a blank space):
 
 ````text
 POST /oauth2/token HTTP/1.1
 Authorization: Basic <base64-encoded-credentials>
 Content-Type: application/x-www-form-urlencoded
 
-grant_type=client_credentials&scope=employee.read
+grant_type=client_credentials&scope=employee.read employee.edit
 ````
 
 Credentials should be base64 encoded as <**client-id**>:<**client-secret**>  

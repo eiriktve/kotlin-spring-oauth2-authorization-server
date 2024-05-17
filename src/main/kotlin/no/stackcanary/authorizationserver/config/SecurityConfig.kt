@@ -45,7 +45,7 @@ import java.util.*
 class SecurityConfig {
 
     /**
-     * Configures the Authorization Server, such as defining the different default endpoints.
+     * Configures the default functionality of the authorization Server, such as initializing the different endpoints.
      */
     @Bean
     fun authorizationServerSettings(): AuthorizationServerSettings =
