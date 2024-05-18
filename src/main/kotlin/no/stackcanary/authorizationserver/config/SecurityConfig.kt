@@ -78,6 +78,7 @@ class SecurityConfig {
             .scope("employee.read")
             .scope("employee.edit")
             .scope("employee.create")
+            .scope("employee.delete")
             .clientSettings(
                 ClientSettings.builder()
                     .requireAuthorizationConsent(true)
