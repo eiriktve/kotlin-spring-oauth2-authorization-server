@@ -51,10 +51,7 @@ class SecurityConfig {
     @Bean
     fun authorizationServerSettings(): AuthorizationServerSettings =
         AuthorizationServerSettings.builder().build()
-
-    /*
-    For removal in 2.0. Use HttpSecurity.with(SecurityConfigurerAdapter, Customizer) and pass in OAuth2AuthorizationServerConfigurer.authorizationServer().
-     */
+    
     @Bean
     @Order(Ordered.HIGHEST_PRECEDENCE)
     fun authServerSecurityFilterChain(http: HttpSecurity): SecurityFilterChain {
