@@ -5,20 +5,19 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.2.5</version>
+        <version>3.4.1</version>
         <relativePath/>
     </parent>
 
     <groupId>no.stackcanary</groupId>
     <artifactId>authorization-server</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.1</version>
     <name>authorization-server</name>
     <description>authorization-server</description>
 
     <properties>
-        <java.version>17</java.version>
-        <kotlin.version>1.9.21</kotlin.version>
-        <exposed.version>0.46.0</exposed.version>
+        <java.version>21</java.version>
+        <kotlin.version>2.1.0</kotlin.version>
     </properties>
 
     <dependencies>
@@ -48,14 +47,14 @@
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-cas</artifactId>
-            <version>6.2.2</version>
+            <version>6.4.2</version>
         </dependency>
 
         <!-- Persistence -->
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <version>42.7.2</version>
+            <version>42.7.4</version>
         </dependency>
 
         <!-- Test -->

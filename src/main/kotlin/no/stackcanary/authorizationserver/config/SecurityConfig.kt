@@ -27,6 +27,7 @@ import org.springframework.security.oauth2.server.authorization.client.JdbcRegis
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository
 import org.springframework.security.oauth2.server.authorization.config.annotation.web.configuration.OAuth2AuthorizationServerConfiguration
+import org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2AuthorizationServerConfigurer
 import org.springframework.security.oauth2.server.authorization.settings.AuthorizationServerSettings
 import org.springframework.security.oauth2.server.authorization.settings.ClientSettings
 import org.springframework.security.oauth2.server.authorization.settings.OAuth2TokenFormat
@@ -51,11 +52,18 @@ class SecurityConfig {
     fun authorizationServerSettings(): AuthorizationServerSettings =
         AuthorizationServerSettings.builder().build()
 
+    /*
+    For removal in 2.0. Use HttpSecurity.with(SecurityConfigurerAdapter, Customizer) and pass in OAuth2AuthorizationServerConfigurer.authorizationServer().
+     */
     @Bean
     @Order(Ordered.HIGHEST_PRECEDENCE)
     fun authServerSecurityFilterChain(http: HttpSecurity): SecurityFilterChain {
-        OAuth2AuthorizationServerConfiguration.applyDefaultSecurity(http)
-        return http.formLogin(Customizer.withDefaults()).build()
+        val authorizationServerConfigurer = OAuth2AuthorizationServerConfigurer.authorizationServer();
+        return http
+            .securityMatcher(authorizationServerConfigurer.endpointsMatcher)
+            .with(authorizationServerConfigurer, Customizer.withDefaults())
+            .build()
+
     }
 
     /**
