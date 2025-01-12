@@ -51,11 +51,11 @@ class SecurityConfig {
     @Bean
     fun authorizationServerSettings(): AuthorizationServerSettings =
         AuthorizationServerSettings.builder().build()
-    
+
     @Bean
     @Order(Ordered.HIGHEST_PRECEDENCE)
     fun authServerSecurityFilterChain(http: HttpSecurity): SecurityFilterChain {
-        val authorizationServerConfigurer = OAuth2AuthorizationServerConfigurer.authorizationServer();
+        val authorizationServerConfigurer = OAuth2AuthorizationServerConfigurer.authorizationServer()
         return http
             .securityMatcher(authorizationServerConfigurer.endpointsMatcher)
             .with(authorizationServerConfigurer, Customizer.withDefaults())

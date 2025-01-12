@@ -14,7 +14,7 @@ to verify access tokens provided by said clients.
 - Client Credential grant
 
 ## Technologies
-- Kotlin with JDK 17
+- Kotlin with JDK 21
 - Spring Boot 3
 - Spring Authorization Server
 - Spring Security
